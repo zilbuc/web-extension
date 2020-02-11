@@ -1,5 +1,4 @@
 import React from 'react';
-// import logo from './logo.svg';
 import InputForm from './components/InputForm/InputForm'
 
 import './App.scss';
