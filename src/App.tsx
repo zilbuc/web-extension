@@ -1,27 +1,37 @@
-import React from 'react';
+import React, { FC, useState } from 'react';
 import InputForm from './components/InputForm/InputForm'
+import UpdateForm from './components/UpdateForm/UpdateForm'
 
 import './App.scss';
 
-const App = () => {
+export interface AppState {
+  // [key: string]: string
+  username: string
+  password: string
+}
+
+const initialState: AppState = {
+  username: '',
+  password: '',
+}
+
+const App: FC<{}> = () => {
+  const [credentials, setCredentials] = useState(initialState)
+
+  // TODO: update state with useEffect from extensionStorageAPI
+
   return (
-    <InputForm />
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.tsx</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
+    <>
+      {credentials.username.length === 0
+        ? <InputForm setCredentials={setCredentials} />
+        : <UpdateForm
+          credentials={credentials}
+          setCredentials={setCredentials}
+        />
+
+        // <UpdateForm credentials={credentials} setCredentials={setCredentials} />
+      }
+    </>
   );
 }
 

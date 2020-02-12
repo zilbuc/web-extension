@@ -1,17 +1,13 @@
-import React, { FC } from 'react'
-import { Formik, Field, Form, FormikHelpers } from 'formik';
-import * as Yup from 'yup';
+import React, { Dispatch, FC, SetStateAction, useEffect } from 'react'
+import { Formik, Field, Form, FormikHelpers } from 'formik'
+import * as Yup from 'yup'
+import { AppState } from '../../App'
 
-import './InputForm.scss'
-import './Skeleton.scss'
+import '../Form.scss'
+import '../Skeleton.scss'
 
-interface Values {
-  userName: string;
-  password: string;
-}
-
-const SignupSchema: Yup.ObjectSchema<Yup.Shape<object, Values>> = Yup.object().shape({
-  userName: Yup.string()
+const SignupSchema: Yup.ObjectSchema<Yup.Shape<object, AppState>> = Yup.object().shape({
+  username: Yup.string()
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
     .required('Required'),
@@ -20,33 +16,50 @@ const SignupSchema: Yup.ObjectSchema<Yup.Shape<object, Values>> = Yup.object().s
     .required('Required'),
 });
 
+export interface InputFormProps {
+  setCredentials: Dispatch<SetStateAction<AppState>>
+}
 
-const InputForm: FC<{}> = () => {
+const initialValues: AppState = {
+  username: '',
+  password: '',
+}
+
+const InputForm: FC<InputFormProps> = ({ setCredentials }) => {
+
+  // let timeoutId: NodeJS.Timeout
+  // const clearTimeouts = () => {
+  //   clearTimeout(timeoutId)
+  //   console.log('3')
+  // }
+
+  useEffect(() => {
+    console.log('1')
+
+    return setCredentials(initialValues)
+  })
+
   return (
     <div className="container">
-      <h1>Login Saviour</h1>
-      <h4>Save your credentials from the wrath of forgetfullness</h4>
+      <h4>Login Saviour</h4>
+      <h5>Save your credentials from the wrath of forgetfullness</h5>
       <Formik
-        initialValues={{
-          userName: '',
-          password: '',
-        }}
+        initialValues={initialValues}
         validationSchema={SignupSchema}
-        onSubmit={(values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-          // setTimeout(() => {
-          //   alert(JSON.stringify(values, null, 2));
-          //   setSubmitting(false);
-          // }, 500);
-          // TODO: do some state setting shit
-          console.log({ values })
+        onSubmit={(values: AppState, { setSubmitting, resetForm }: FormikHelpers<AppState>) => {
+          // timeoutId = setCredentials(values)
+
+          // TODO: update extensionStorage,
+          setSubmitting(false)
+          resetForm()
         }}
       >
         {({ errors, touched }) => (
           <Form>
-            <label htmlFor="userName">User Name</label>
-            <Field id="userName" name="userName" placeholder="enter your name" type="text" />
-            {errors.userName && touched.userName ? (
-              <div className='error-msg'>{errors.userName}</div>
+            <label htmlFor="username">User Name</label>
+            <Field id="username" name="username" placeholder="enter username" type="text" />
+            {errors.username && touched.username ? (
+              <div className='error-msg'>{errors.username}</div>
             ) : null}
 
             <label htmlFor="password">Password</label>
@@ -56,7 +69,7 @@ const InputForm: FC<{}> = () => {
             ) : null}
 
             <div className='submit-btn-wrapper'>
-              <button type="submit">
+              <button type="submit" className='submit-btn'>
                 Submit
               </button>
             </div>
@@ -68,3 +81,6 @@ const InputForm: FC<{}> = () => {
 }
 
 export default InputForm
+
+//clean the form after submitting
+// what the shnitzel memory leak? setCredentials must be unsubscribed
