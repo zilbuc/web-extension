@@ -3,11 +3,10 @@ import { browser } from 'webextension-polyfill-ts'
 import { InputForm, UpdateForm } from './components'
 import { AppState, initialState, storageName } from './utils'
 
-import './App.scss';
+import styles from './App.module.scss';
 
 // TODO: 
 // * modify webpack - DONE - is .map needed?....
-// * update texts
 // * add Crypto
 // * change SCSS to suggested lib
 // * add catch block for storage?
@@ -33,7 +32,7 @@ const App: FC<{}> = () => {
   })
 
   return (
-    <div className='app-wrapper'>
+    <div className={styles.appWrapper}>
       {credentials.username.length === 0
         ? <InputForm setCredentials={setCredentials} />
         : <UpdateForm

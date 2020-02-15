@@ -17,4 +17,5 @@ export interface FormTemplateProps {
   errors: FormikErrors<AppState>
   touched: FormikTouched<AppState>
   buttonName: string
+  actionType: string
 }

@@ -10,8 +10,7 @@ import {
   updateStorage,
 } from '../../utils'
 
-import '../Form.scss'
-import '../Skeleton.scss'
+import styles from '../Form.module.scss'
 
 export const UpdateForm: FC<UpdateFormProps> = ({ credentials: { username, password }, setCredentials }) => {
 
@@ -19,7 +18,7 @@ export const UpdateForm: FC<UpdateFormProps> = ({ credentials: { username, passw
   const [isEmptyUpdate, setIsEmptyUpdate] = useState(false)
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <h4>Login Saviour</h4>
       <h5>Credentials are safe!<span>*</span></h5>
       <Formik
@@ -61,15 +60,16 @@ export const UpdateForm: FC<UpdateFormProps> = ({ credentials: { username, passw
             errors={errors}
             touched={touched}
             buttonName='Update Credentials'
+            actionType='update'
           />
         )}
       </Formik>
 
-      {isUpdated && <div className='update-msg'>Update succesful!</div>}
+      {isUpdated && <div className={styles.updateMsg}>Update succesful!</div>}
 
-      {isEmptyUpdate && <div className='error-msg'>Please fill at least one fied to update!</div>}
+      {isEmptyUpdate && <div className={styles.errorMsg}>Please fill at least one fied to update!</div>}
 
-      <div className='update-msg'><span>*</span>From the wrath of forgetfullness</div>
+      <div className={styles.updateMsg}><span>*</span>From the wrath of forgetfullness</div>
     </div>
   )
 }

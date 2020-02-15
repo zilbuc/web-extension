@@ -1,18 +1,20 @@
-.error-msg {
+@import './Skeleton.scss';
+
+.errorMsg {
   margin-bottom: 10px;
   color: orangered;
 }
 
-.submit-btn-wrapper {
+.submitButtonWrapper {
   display: block;
   padding-top: 5px;
 
-  .submit-btn {
+  .submitButton {
     background-color: palegreen;
   }
 }
 
-.update-msg {
+.updateMsg {
   color: green;
   margin-bottom: 10px;
 }

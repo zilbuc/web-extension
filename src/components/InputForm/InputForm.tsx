@@ -9,8 +9,7 @@ import {
   updateStorage
 } from '../../utils'
 
-import '../Form.scss'
-import '../Skeleton.scss'
+import styles from '../Form.module.scss'
 
 export const InputForm: FC<InputFormProps> = ({ setCredentials }) => {
 
@@ -21,7 +20,7 @@ export const InputForm: FC<InputFormProps> = ({ setCredentials }) => {
   })
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <h4>Login Saviour</h4>
       <h5>Save your credentials from the wrath of forgetfullness</h5>
       <Formik
@@ -39,6 +38,7 @@ export const InputForm: FC<InputFormProps> = ({ setCredentials }) => {
             errors={errors}
             touched={touched}
             buttonName='Submit Credentials'
+            actionType='enter'
           />
         )}
       </Formik>

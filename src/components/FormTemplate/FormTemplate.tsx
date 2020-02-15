@@ -2,22 +2,24 @@ import React, { FC } from 'react'
 import { Field, Form } from 'formik'
 import { FormTemplateProps } from '../../utils'
 
-export const FormTemplate: FC<FormTemplateProps> = ({ errors, touched, buttonName }) => (
+import styles from '../Form.module.scss'
+
+export const FormTemplate: FC<FormTemplateProps> = ({ errors, touched, buttonName, actionType }) => (
   <Form>
     <label htmlFor="username">User Name</label>
-    <Field id="username" name="username" placeholder="enter username" type="text" />
+    <Field id="username" name="username" placeholder={`${actionType} username`} type="text" />
     {errors.username && touched.username ? (
-      <div className='error-msg'>{errors.username}</div>
+      <div className={styles.errorMsg}>{errors.username}</div>
     ) : null}
 
     <label htmlFor="password">Password</label>
-    <Field id="password" name="password" placeholder="enter your password" type="password" />
+    <Field id="password" name="password" placeholder={`${actionType} your password`} type="password" />
     {errors.password && touched.password ? (
-      <div className='error-msg'>{errors.password}</div>
+      <div className={styles.errorMsg}>{errors.password}</div>
     ) : null}
 
-    <div className='submit-btn-wrapper'>
-      <button type="submit" className='submit-btn'>
+    <div className={styles.submitButtonWrapper}>
+      <button type="submit" className={styles.submitButton}>
         {buttonName}
       </button>
     </div>
