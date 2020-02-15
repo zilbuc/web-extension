@@ -1,48 +1,27 @@
 import React, { FC, useState } from 'react'
-import { Formik, Field, Form, FormikHelpers } from 'formik'
-import * as Yup from 'yup'
-import { AppState } from '../../App'
-import { InputFormProps, updateStorage } from '../InputForm/InputForm'
+import { Formik, FormikHelpers } from 'formik'
+import { FormTemplate } from '../../components'
+import {
+  AppState,
+  checkLength,
+  initialState as initialUpdateFormValues,
+  UpdateFormProps,
+  UpdateSchema,
+  updateStorage,
+} from '../../utils'
 
 import '../Form.scss'
 import '../Skeleton.scss'
-import { setTimeout } from 'timers'
 
-interface UpdateFormProps extends InputFormProps {
-  credentials: AppState
-}
+export const UpdateForm: FC<UpdateFormProps> = ({ credentials: { username, password }, setCredentials }) => {
 
-const UpdateSchema: Yup.ObjectSchema<Yup.Shape<object, AppState>> = Yup.object().shape({
-  username: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!'),
-  password: Yup.string()
-    .min(6, 'Password has to be longer than 6 characters!')
-});
-
-// type Creds = Yup.InferType<typeof UpdateSchema>;
-
-const initialUpdateFormValues: AppState = {
-  username: '',
-  password: '',
-}
-
-
-const initialState = false
-
-const checkLength = (str: string): boolean => {
-  return str.length > 0
-}
-
-const UpdateForm: FC<UpdateFormProps> = ({ credentials: { username, password }, setCredentials }) => {
-
-  const [isUpdated, setIsUpdated] = useState(initialState)
-  const [isEmptyUpdate, setIsEmptyUpdate] = useState(initialState)
+  const [isUpdated, setIsUpdated] = useState(false)
+  const [isEmptyUpdate, setIsEmptyUpdate] = useState(false)
 
   return (
     <div className="container">
       <h4>Login Saviour</h4>
-      <h5>Update your credentials from the wrath of forgetfullness</h5>
+      <h5>Credentials are safe!<span>*</span></h5>
       <Formik
         initialValues={initialUpdateFormValues}
         validationSchema={UpdateSchema}
@@ -64,7 +43,6 @@ const UpdateForm: FC<UpdateFormProps> = ({ credentials: { username, password }, 
             setCredentials(updatedCredentials)
             updateStorage(updatedCredentials)
             setIsUpdated(true)
-            // TODO: update extensionStorage
 
             setTimeout(() => {
               setIsUpdated(false)
@@ -79,26 +57,11 @@ const UpdateForm: FC<UpdateFormProps> = ({ credentials: { username, password }, 
         }}
       >
         {({ errors, touched }) => (
-          <Form>
-            <label htmlFor="username">User Name</label>
-            <Field id="username" name="username" placeholder="enter username" type="text" />
-            {errors.username && touched.username ? (
-              <div className='error-msg'>{errors.username}</div>
-            ) : null}
-
-            <label htmlFor="password">Password</label>
-            <Field id="password" name="password" placeholder="enter your password" type="password" />
-            {errors.password && touched.password ? (
-              <div className='error-msg'>{errors.password}</div>
-            ) : null}
-
-            <div className='submit-btn-wrapper'>
-              <button type="submit" className='submit-btn'>
-                Update Credentials
-              </button>
-            </div>
-
-          </Form>
+          <FormTemplate
+            errors={errors}
+            touched={touched}
+            buttonName='Update Credentials'
+          />
         )}
       </Formik>
 
@@ -106,8 +69,7 @@ const UpdateForm: FC<UpdateFormProps> = ({ credentials: { username, password }, 
 
       {isEmptyUpdate && <div className='error-msg'>Please fill at least one fied to update!</div>}
 
+      <div className='update-msg'><span>*</span>From the wrath of forgetfullness</div>
     </div>
   )
 }
-
-export default UpdateForm
