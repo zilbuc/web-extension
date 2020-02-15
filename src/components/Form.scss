@@ -1,17 +1,21 @@
-.error-msg {
-  margin-bottom: 10px;
-  color: orangered;
-}
-
-.submit-btn-wrapper {
-  display: block;
-  padding-top: 5px;
-
-  .submit-btn {
-    background-color: palegreen;
+#root {
+  margin-top: 15px;
+  
+  .error-msg {
+    margin-bottom: 10px;
+    color: orangered;
   }
-}
-
-.update-msg {
-  color: green;
+  
+  .submit-btn-wrapper {
+    display: block;
+    padding-top: 5px;
+  
+    .submit-btn {
+      background-color: palegreen;
+    }
+  }
+  
+  .update-msg {
+    color: green;
+  }
 }

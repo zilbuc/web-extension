@@ -1,5 +1,7 @@
-import React, { Dispatch, FC, SetStateAction, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Formik, Field, Form, FormikHelpers } from 'formik'
+// import { browser } from 'webextension-polyfill-ts'
+// import chromep from 'chrome-promise'
 import * as Yup from 'yup'
 import { AppState } from '../../App'
 
@@ -17,7 +19,7 @@ const SignupSchema: Yup.ObjectSchema<Yup.Shape<object, AppState>> = Yup.object()
 });
 
 export interface InputFormProps {
-  setCredentials: Dispatch<SetStateAction<AppState>>
+  setCredentials(credentials: AppState): void
 }
 
 const initialValues: AppState = {
@@ -25,18 +27,33 @@ const initialValues: AppState = {
   password: '',
 }
 
+declare const chrome: any
+
+// const { chrome } = window
+// let chrm: any;
+
+// const chrm = window.chrome 
+
+export const updateStorage = (creds: AppState): void => {
+  chrome.storage.local.set(creds, () => {
+    console.log('Value is set to ' + creds.password);
+  });
+  // if (chromep.runtime) {
+  // chromep.storage.local.set(creds)
+  //   .then(() => {
+  //     alert('foo set')
+
+  //     console.log(chromep.storage.local.get(creds))
+  //   })
+  // }
+}
+
 const InputForm: FC<InputFormProps> = ({ setCredentials }) => {
 
-  // let timeoutId: NodeJS.Timeout
-  // const clearTimeouts = () => {
-  //   clearTimeout(timeoutId)
-  //   console.log('3')
-  // }
+  let timeoutId: number
 
   useEffect(() => {
-    console.log('1')
-
-    return setCredentials(initialValues)
+    return () => clearTimeout(timeoutId)
   })
 
   return (
@@ -46,12 +63,12 @@ const InputForm: FC<InputFormProps> = ({ setCredentials }) => {
       <Formik
         initialValues={initialValues}
         validationSchema={SignupSchema}
-        onSubmit={(values: AppState, { setSubmitting, resetForm }: FormikHelpers<AppState>) => {
-          // timeoutId = setCredentials(values)
+        onSubmit={(values: AppState, { setSubmitting }: FormikHelpers<AppState>) => {
+          timeoutId = setTimeout(() => setCredentials(values))
 
+          updateStorage(values)
           // TODO: update extensionStorage,
           setSubmitting(false)
-          resetForm()
         }}
       >
         {({ errors, touched }) => (
@@ -81,6 +98,3 @@ const InputForm: FC<InputFormProps> = ({ setCredentials }) => {
 }
 
 export default InputForm
-
-//clean the form after submitting
-// what the shnitzel memory leak? setCredentials must be unsubscribed
