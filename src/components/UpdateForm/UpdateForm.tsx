@@ -65,7 +65,7 @@ export const UpdateForm: FC<UpdateFormProps> = ({ credentials: { username, passw
         )}
       </Formik>
 
-      {isUpdated && <div className={styles.updateMsg}>Update succesful!</div>}
+      {(isUpdated && !isEmptyUpdate) && <div className={styles.updateMsg}>Update succesful!</div>}
 
       {isEmptyUpdate && <div className={styles.errorMsg}>Please fill at least one fied to update!</div>}
 

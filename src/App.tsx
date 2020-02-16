@@ -8,9 +8,8 @@ import styles from './App.module.scss';
 // TODO: 
 // * modify webpack - DONE - is .map needed?....
 // * add Crypto
-// * change SCSS to suggested lib
 // * add catch block for storage?
-// * add content scripts
+// * add content scripts - they need to use Crypto as well.
 // * test of firefox
 // * add cypress tests for app - meh, it can be tested only as extension? ... sucks
 // * add tests for extension + storage?
