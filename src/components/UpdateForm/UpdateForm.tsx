@@ -4,6 +4,7 @@ import { FormTemplate } from '../../components'
 import {
   AppState,
   checkLength,
+  decryptPassword,
   initialState as initialUpdateFormValues,
   UpdateFormProps,
   UpdateSchema,
@@ -32,7 +33,7 @@ export const UpdateForm: FC<UpdateFormProps> = ({ credentials: { username, passw
           if (isUsername || isPassword) {
 
             const updatedUsername = isUsername ? values.username : username
-            const updatedPassword = isPassword ? values.password : password
+            const updatedPassword = isPassword ? values.password : decryptPassword(password)
             const updatedCredentials: AppState = {
               username: updatedUsername,
               password: updatedPassword,

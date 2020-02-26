@@ -6,3 +6,5 @@ export const initialState: AppState = {
 }
 
 export const storageName = 'creds'
+
+export const pin = '1234'

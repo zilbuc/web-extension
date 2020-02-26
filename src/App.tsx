@@ -5,14 +5,6 @@ import { AppState, initialState, storageName } from './utils'
 
 import styles from './App.module.scss';
 
-// TODO: 
-// * modify webpack - DONE - is .map needed?....
-// * add Crypto
-// * add catch block for storage?
-// * add content scripts - they need to use Crypto as well.
-// * test of firefox
-// * add cypress tests for app - meh, it can be tested only as extension? ... sucks
-// * add tests for extension + storage?
 const App: FC<{}> = () => {
 
   const [credentials, setCredentials] = useState(initialState)
@@ -28,7 +20,7 @@ const App: FC<{}> = () => {
           setCredentials(savedCreds)
         }
       })
-  })
+  }, [])
 
   return (
     <div className={styles.appWrapper}>

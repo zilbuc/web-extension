@@ -25,7 +25,8 @@
     "start": "react-scripts start",
     "build": "INLINE_RUNTIME_CHUNK=false react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cy:open": "cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -44,6 +45,7 @@
   },
   "devDependencies": {
     "copy-webpack-plugin": "^5.1.1",
+    "cypress": "^4.0.2",
     "webextension-polyfill-ts": "^0.12.0"
   }
 }

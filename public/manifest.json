@@ -4,6 +4,27 @@
   "author": "ZB",
   "version": "1.0.1",
   "description": "Save your credentials from the wrath of forgetfullness.",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/",
+        "https://www.reddit.com/",
+        "https://signin.ebay.com/signin/",
+        "https://store.steampowered.com/login"
+      ],
+      "js": [
+        "browser-polyfill.min.js",
+        "crypto-js.min.js",
+        "contentScript.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "browser-polyfill.min.js",
+      "backgroundScript.js"
+    ]
+  },
   "icons": {
     "16": "16.png",
     "48": "48.png",
@@ -12,12 +33,10 @@
   "browser_action": {
     "default_popup": "index.html"
   },
-  "background": {
-    "scripts": [
-      "browser-polyfill.min.js"
-    ]
-  },
   "permissions": [
-    "storage"
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "tabs"
   ]
 }

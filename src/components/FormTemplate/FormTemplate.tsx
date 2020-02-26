@@ -7,7 +7,7 @@ import styles from '../Form.module.scss'
 export const FormTemplate: FC<FormTemplateProps> = ({ errors, touched, buttonName, actionType }) => (
   <Form>
     <label htmlFor="username">User Name</label>
-    <Field id="username" name="username" placeholder={`${actionType} username`} type="text" />
+    <Field id="username" name="username" placeholder={`${actionType} username`} type="text" autofocus />
     {errors.username && touched.username ? (
       <div className={styles.errorMsg}>{errors.username}</div>
     ) : null}
