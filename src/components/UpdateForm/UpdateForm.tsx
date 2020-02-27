@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Formik, FormikHelpers } from 'formik'
-import { FormTemplate } from '../../components'
+import { FormTemplate } from '..'
 import {
   AppState,
   checkLength,
@@ -66,11 +66,11 @@ export const UpdateForm: FC<UpdateFormProps> = ({ credentials: { username, passw
         )}
       </Formik>
 
-      {(isUpdated && !isEmptyUpdate) && <div className={styles.updateMsg}>Update succesful!</div>}
+      {(isUpdated && !isEmptyUpdate) && <div className={styles.updateMsg}>Update successful!</div>}
 
-      {isEmptyUpdate && <div className={styles.errorMsg}>Please fill at least one fied to update!</div>}
+      {isEmptyUpdate && <div className={styles.errorMsg}>Please fill at least one field to update!</div>}
 
-      <div className={styles.updateMsg}><span>*</span>From the wrath of forgetfullness</div>
+      <div className={styles.updateMsg}><span>*</span>From the wrath of forgetfulness</div>
     </div>
   )
 }

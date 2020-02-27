@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { Formik, FormikHelpers } from 'formik'
-import { FormTemplate } from '../../components'
+import { FormTemplate } from '..'
 import {
   AppState,
   initialState as initialValues,
@@ -22,7 +22,7 @@ export const InputForm: FC<InputFormProps> = ({ setCredentials }) => {
   return (
     <div className={styles.container}>
       <h4>Login Saviour</h4>
-      <h5>Save your credentials from the wrath of forgetfullness</h5>
+      <h5>Save your credentials from the wrath of forgetfulness</h5>
       <Formik
         initialValues={initialValues}
         validationSchema={SignupSchema}

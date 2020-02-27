@@ -3,7 +3,7 @@
   "name": "Login Saviour",
   "author": "ZB",
   "version": "1.0.1",
-  "description": "Save your credentials from the wrath of forgetfullness.",
+  "description": "Save your credentials from the wrath of forgetfulness.",
   "content_scripts": [
     {
       "matches": [
