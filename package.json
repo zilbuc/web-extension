@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "copy-webpack-plugin": "^5.1.1",
-    "cypress": "^4.0.2",
+    "cypress": "^4.12.1",
     "webextension-polyfill-ts": "^0.12.0"
   }
 }
